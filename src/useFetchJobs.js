@@ -28,10 +28,10 @@ const reducer = (state, action) => {
   }
 };
 
-// const BASE_URL =
-//   "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json";
 const BASE_URL =
-  "https://api.allorigins.win/raw?url=https://jobs.github.com/positions.json";
+  "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json";
+// const BASE_URL =
+//   "https://api.allorigins.win/raw?url=https://jobs.github.com/positions.json";
 
 export default function useFetchJobs(params, page) {
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
