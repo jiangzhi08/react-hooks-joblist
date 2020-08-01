@@ -13,17 +13,22 @@ export default function AddForm({ generateQR }) {
 
   return (
     <form className="mb-2" onSubmit={(e) => handleOnClick(e)}>
-      <label>URL or Text</label>
-      <input
-        className="ml-2"
-        type="text"
-        style={{ width: "60%" }}
-        value={cityname}
-        onChange={(e) => {
-          setCityname(e.target.value);
-        }}
-      />
-      <Button variant="btn btn-primary" className="ml-2" type="submit">
+      <div>
+        <label className="ml-2">URL or Text</label>
+      </div>
+
+      <div>
+        <input
+          className="ml-2"
+          type="text"
+          style={{ width: "80%" }}
+          value={cityname}
+          onChange={(e) => {
+            setCityname(e.target.value);
+          }}
+        />
+      </div>
+      <Button variant="btn btn-primary" className="ml-2 my-2" type="submit">
         QR Code Generator
       </Button>
     </form>

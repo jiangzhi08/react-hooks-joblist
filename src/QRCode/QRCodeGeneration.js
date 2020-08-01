@@ -15,8 +15,8 @@ export default function QRCodeGeneration() {
 
   return (
     <Container className="my-4">
-      <AddForm generateQR={generateQR} />
       <canvas id="canvas"></canvas>
+      <AddForm generateQR={generateQR} />
     </Container>
   );
 }

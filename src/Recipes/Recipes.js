@@ -45,7 +45,7 @@ export default function Recipes({ cuisineType }) {
 
   return (
     <div className={styles.recipes_app}>
-      <h1 className={styles.title}> Recipes</h1>
+      <h1 className={styles.title}>Recipes</h1>
       <form className={styles.search_form} onSubmit={getSearch}>
         <input
           className={styles.search_bar}
