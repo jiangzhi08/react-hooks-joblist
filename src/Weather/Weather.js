@@ -34,7 +34,7 @@ export default function Weather() {
     const fetchWeather = (city) => {
       // 1c59674e8d47a6edbaf3feff732e2864
       // 542ffd081e67f4512b705f89d2a611b2
-      const BASE_URL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=542ffd081e67f4512b705f89d2a611b2`;
+      const BASE_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=542ffd081e67f4512b705f89d2a611b2`;
       axios
         .get(BASE_URL)
         .then((res) => {
@@ -61,7 +61,7 @@ export default function Weather() {
       return;
     }
 
-    const BASE_URL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=542ffd081e67f4512b705f89d2a611b2`;
+    const BASE_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=542ffd081e67f4512b705f89d2a611b2`;
     axios
       .get(BASE_URL)
       .then((res) => {
