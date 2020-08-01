@@ -1,30 +1,25 @@
-import React, { useState } from "react";
-import useFetchJobs from "./useFetchJobs";
+import React from "react";
 import { Container } from "react-bootstrap";
-import Job from "./Job";
-import JobsPagination from "./JobsPagination";
-import SearchForm from "./SearchForm";
 import LoginButton from "./Auth0/LoginButton";
 import LogoutButton from "./Auth0/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import GitHubJobList from "./GitHubJobs/GitHubJobList";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import NavbarZJ from "./components/NavbarZJ";
+import Weather from "./Weather/Weather";
+import Recipes from "./Recipes/Recipes";
+import QRCodeGeneration from "./QRCode/QRCodeGeneration";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
-  const [params, setParams] = useState({});
-  const [page, setPage] = useState(1);
-  const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page);
-
-  const handleParamChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setPage(1);
-    setParams((prev) => {
-      return { ...prev, [name]: value };
-    });
-  };
 
   return (
     <Container className="my-4">
+      <img
+        style={{ width: "100px", margin: "0 50px 0 0" }}
+        src={require("./images/zjlogo.png")}
+        alt="logo"
+      />
       {isAuthenticated && (
         <span className="mr-6">
           Welcome, {user.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -32,18 +27,40 @@ function App() {
       )}
       {!isAuthenticated && <LoginButton />}
       {isAuthenticated && <LogoutButton />}
-      <br />
-      <br />
-      <h1 className="mb-4">GitHub Jobs</h1>
-      <SearchForm params={params} onParamChange={handleParamChange} />
-      <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} />
-      {loading && (
-        <img src={require("./loader.gif")} alt="Loading" width="100" />
-      )}
-      {error && <h1>error, refreshing page: {error}</h1>}
-      {jobs.map((job) => {
-        return <Job key={job.id} job={job} />;
-      })}
+      {/* <br />
+      <br /> */}
+
+      <NavbarZJ />
+
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={GitHubJobList} />
+          <Route exact path="/GitHubJobList" component={GitHubJobList} />
+          <Route exact path="/QRCode" component={QRCodeGeneration} />
+          <Route exact path="/Weather" component={Weather} />
+          <Route
+            exact
+            path="/Recipes/Mediterranean"
+            component={() => <Recipes cuisineType="Mediterranean" />}
+          />
+          <Route
+            exact
+            path="/Recipes/Caribbean"
+            component={() => <Recipes cuisineType="Caribbean" />}
+          />
+          <Route
+            exact
+            path="/Recipes/Italian"
+            component={() => <Recipes cuisineType="Italian" />}
+          />
+          <Route
+            exact
+            path="/Recipes/Japanese"
+            component={() => <Recipes cuisineType="Japanese" />}
+          />
+          <Route component={GitHubJobList} />
+        </Switch>
+      </BrowserRouter>
     </Container>
   );
 }
