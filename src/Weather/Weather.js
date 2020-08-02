@@ -38,6 +38,7 @@ export default function Weather() {
     };
 
     const citiesInitial = [
+      "Plano",
       "Dallas",
       "Austin",
       "San Antonio",
@@ -45,6 +46,7 @@ export default function Weather() {
       "New York",
       "San Fransisco",
       "Beijing",
+      "Chongqing",
     ];
     citiesInitial.forEach(fetchWeather);
   }, []);
