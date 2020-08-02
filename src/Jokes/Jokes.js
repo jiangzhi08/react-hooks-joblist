@@ -20,8 +20,9 @@ export default function Jokes() {
       .then((response) => {
         // setRandomjokes((msgs) => msgs.concat(response.data));
         setRandomjokes((prev) => {
-          let find = prev.find((item) => item.id === response.data.id);
-          return find ? prev : [...prev, response.data];
+          return [...prev, response.data];
+          //   let find = prev.find((item) => item.id === response.data.id);
+          //   return find ? prev : [...prev, response.data];
         });
       })
       .catch((error) => {
@@ -60,8 +61,8 @@ export default function Jokes() {
 
       <Container>
         {/* <h1>{randomjokes.length}</h1> */}
-        {randomjokes.map((item) => (
-          <Joke key={item.id} jokecontent={item.joke} />
+        {randomjokes.map((item, index) => (
+          <Joke key={index} jokecontent={item.joke} />
         ))}
       </Container>
       <Modal show={show} onHide={handleClose}>
