@@ -9,6 +9,8 @@ import NavbarZJ from "./components/NavbarZJ";
 import Weather from "./Weather/Weather";
 import Recipes from "./Recipes/Recipes";
 import QRCodeGeneration from "./QRCode/QRCodeGeneration";
+import COVID from "./COVID/COVID";
+import Movies from "./Movies/Movies";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -16,7 +18,7 @@ function App() {
   return (
     <Container className="my-4">
       <img
-        style={{ width: "100px", margin: "0 50px 0 0" }}
+        style={{ width: "50px", margin: "0 50px 0 0" }}
         src={require("./images/zjlogo.png")}
         alt="logo"
       />
@@ -27,8 +29,6 @@ function App() {
       )}
       {!isAuthenticated && <LoginButton />}
       {isAuthenticated && <LogoutButton />}
-      {/* <br />
-      <br /> */}
 
       <NavbarZJ />
 
@@ -36,8 +36,10 @@ function App() {
         <Switch>
           <Route exact path="/" component={GitHubJobList} />
           <Route exact path="/GitHubJobList" component={GitHubJobList} />
-          <Route exact path="/QRCode" component={QRCodeGeneration} />
+          <Route exact path="/COVID" component={COVID} />
           <Route exact path="/Weather" component={Weather} />
+          <Route exact path="/Movies" component={Movies} />
+          <Route exact path="/QRCode" component={QRCodeGeneration} />
           <Route
             exact
             path="/Recipes/Mediterranean"

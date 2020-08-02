@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default function AddForm({ onClickAddcity }) {
   const [cityname, setCityname] = useState("");

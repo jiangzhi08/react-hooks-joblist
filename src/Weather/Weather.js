@@ -12,16 +12,7 @@ export default function Weather() {
   // const BASE_URL =
   //   "http://api.openweathermap.org/data/2.5/weather?id=524901&APPID=542ffd081e67f4512b705f89d2a611b2";
 
-  const citiesInitial = [
-    "Dallas",
-    "Austin",
-    "San Antonio",
-    "Chicago",
-    "New York",
-    "San Fransisco",
-    "Beijing",
-  ];
-  const [cities, setCitites] = useState(citiesInitial);
+  // const [cities, setCitites] = useState(citiesInitial);
 
   const [weatherdata, setWeatherdata] = useState([]);
 
@@ -46,7 +37,16 @@ export default function Weather() {
         });
     };
 
-    cities.forEach(fetchWeather);
+    const citiesInitial = [
+      "Dallas",
+      "Austin",
+      "San Antonio",
+      "Chicago",
+      "New York",
+      "San Fransisco",
+      "Beijing",
+    ];
+    citiesInitial.forEach(fetchWeather);
   }, []);
 
   const onDeleteCity = (id) => {

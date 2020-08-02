@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Card, Badge, Button, Collapse } from "react-bootstrap";
+import React from "react";
+import { Card, Badge, Button } from "react-bootstrap";
 
 export default function CityWeather({ weather, onDeleteCity }) {
-  const [open, setOpen] = useState(false);
-
   const celsiustofahrenheit = (temp) => {
     const fa = (Math.round(temp - 273) * 9) / 5 + 32;
     return fa;
@@ -27,8 +25,7 @@ export default function CityWeather({ weather, onDeleteCity }) {
                 {weather.weather[0].main}
               </span>
               <Button
-                className="remove-btn"
-                className="float-right"
+                className="float-right remove-btn"
                 height="10px"
                 color="danger"
                 size="sm"

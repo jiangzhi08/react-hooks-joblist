@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Recipe from "./Recipe";
 import styles from "./Recipes.module.css";
+import { Alert } from "react-bootstrap";
 
 export default function Recipes({ cuisineType }) {
   const APP_ID = "0baa6c40";
@@ -59,9 +60,11 @@ export default function Recipes({ cuisineType }) {
       </form>
 
       <h3>
-        {recipes.length === 0
-          ? "Too many requests.  Please wait a moment to refresh."
-          : ""}
+        {recipes.length === 0 ? (
+          <Alert variant="warning">
+            Can not find or too many requests. Please wait a moment to refresh.
+          </Alert>
+        ) : null}
       </h3>
 
       <div className={styles.recipes}>

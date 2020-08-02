@@ -4,26 +4,6 @@ import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 export default function NavbarZJ() {
   return (
     <React.Fragment>
-      {/* <Nav
-        activeKey="/home"
-        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
-        <Nav.Item>
-          <Nav.Link href="/home">Active</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-1">Link</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-2">Link</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="disabled" disabled>
-            Disabled
-          </Nav.Link>
-        </Nav.Item>
-      </Nav> */}
-
       {/* <img src={require("../images/zjlogo.png")} /> */}
       <Navbar bg="primary" variant="dark" expand="lg">
         {/* <Navbar.Brand href="/">ZJ-Space</Navbar.Brand> */}
@@ -32,8 +12,10 @@ export default function NavbarZJ() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/GitHubJobList">GitHubJobs</Nav.Link>
-            <Nav.Link href="/QRCode">QRCode</Nav.Link>
+            <Nav.Link href="/COVID">COVID</Nav.Link>
             <Nav.Link href="/Weather">Weather</Nav.Link>
+            <Nav.Link href="/Movies">Movies</Nav.Link>
+            <Nav.Link href="/QRCode">QRCode</Nav.Link>
             <NavDropdown title="Recipes" id="basic-nav-dropdown">
               <NavDropdown.Item href="/Recipes/Mediterranean">
                 Mediterranean

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default function AddForm({ generateQR }) {
   const [cityname, setCityname] = useState(
@@ -14,7 +14,7 @@ export default function AddForm({ generateQR }) {
   return (
     <form className="mb-2" onSubmit={(e) => handleOnClick(e)}>
       <div>
-        <label className="ml-2">URL or Text</label>
+        <label className="ml-2">Enter URL or Text to generate QR Code</label>
       </div>
 
       <div>
