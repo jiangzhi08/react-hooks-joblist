@@ -31,9 +31,16 @@ export default function Jokes() {
       });
   };
 
-  const fetchMultipleJokes = (num) => {
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  const fetchMultipleJokes = async (num) => {
     setRandomjokes((prev) => []);
-    for (let i = 0; i < num; i++) fetchOneJoke();
+    for (let i = 0; i < num; i++) {
+      fetchOneJoke();
+      await sleep(1000);
+    }
   };
 
   useEffect(() => {
