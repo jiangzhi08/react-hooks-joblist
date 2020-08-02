@@ -20,9 +20,9 @@ export default function Jokes() {
       .then((response) => {
         // setRandomjokes((msgs) => msgs.concat(response.data));
         setRandomjokes((prev) => {
-          return [...prev, response.data];
-          //   let find = prev.find((item) => item.id === response.data.id);
-          //   return find ? prev : [...prev, response.data];
+          //   return [...prev, response.data];
+          let find = prev.find((item) => item.id === response.data.id);
+          return find ? prev : [...prev, response.data];
         });
       })
       .catch((error) => {
@@ -39,7 +39,7 @@ export default function Jokes() {
     setRandomjokes((prev) => []);
     for (let i = 0; i < num; i++) {
       fetchOneJoke();
-      await sleep(1000);
+      await sleep(100);
     }
   };
 
