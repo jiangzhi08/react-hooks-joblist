@@ -14,13 +14,17 @@ export default function News() {
 
   const fetchNews = (category) => {
     // const BASE_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=fe669351939f40d5b385ad6ec93c0df6`;
-    const BASE_URL = `https://gnews.io/api/v3/topics/${category}?token=0898d87cbb9f6b0b247b3cdbcafa61af`;
+    // const BASE_URL = `https://gnews.io/api/v3/topics/${category}?token=0898d87cbb9f6b0b247b3cdbcafa61af`;
+    const BASE_URL = `https://api.nytimes.com/svc/news/v3/content/all/${category}.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI`;
+
+    // https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI
+    //https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI
 
     axios
       .get(BASE_URL)
       .then((res) => {
-        setNewsdata(res.data.articles);
-        console.log(res.data.articles);
+        setNewsdata(res.data.results);
+        // console.log(res.data.results);
       })
       .catch((e) => {
         handleShow();
@@ -29,7 +33,7 @@ export default function News() {
   };
 
   useEffect(() => {
-    fetchNews("nation");
+    fetchNews("u.s.");
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -51,9 +55,9 @@ export default function News() {
         <Button
           className={styles.newsbutton}
           onClick={handOnclick}
-          value="nation"
+          value="u.s."
         >
-          nation
+          u.s.
         </Button>
 
         <Button
@@ -66,9 +70,9 @@ export default function News() {
         <Button
           className={styles.newsbutton}
           onClick={handOnclick}
-          value="entertainment"
+          value="fashion"
         >
-          entertainment
+          fashion
         </Button>
 
         <Button
@@ -104,8 +108,8 @@ export default function News() {
         </Button>
       </div>
 
-      {newsdata.map((item) => {
-        return <SingleNews key={item.title} newsobj={item} />;
+      {newsdata.map((item, index) => {
+        return <SingleNews key={index} newsobj={item} />;
       })}
 
       <Modal show={show} onHide={handleClose}>
