@@ -3,3 +3,9 @@
   to = "https://api.openweathermap.org/:splat"
   status = 200
   force=true
+
+  [[redirects]]
+  from = "https://awesome-darwin-99824f.netlify.app/newsapi.org/*"
+  to = "https://newsapi.org/:splat"
+  status = 200
+  force=true
