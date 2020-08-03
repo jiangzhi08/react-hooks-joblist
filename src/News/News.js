@@ -106,6 +106,14 @@ export default function News() {
         >
           technology
         </Button>
+
+        <Button
+          className={styles.newsbutton}
+          onClick={handOnclick}
+          value="food"
+        >
+          food
+        </Button>
       </div>
 
       {newsdata.map((item, index) => {
@@ -116,7 +124,9 @@ export default function News() {
         <Modal.Header closeButton>
           <Modal.Title>Info:</Modal.Title>
         </Modal.Header>
-        <Modal.Body>City is already on list or cannot be found!</Modal.Body>
+        <Modal.Body>
+          Network Error: too many requests, refresh later please ...
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
