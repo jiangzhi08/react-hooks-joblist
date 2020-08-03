@@ -13,7 +13,7 @@ export default function News() {
   const handleShow = () => setShow(true);
 
   const fetchNews = (category) => {
-    const BASE_URL = `http://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=fe669351939f40d5b385ad6ec93c0df6`;
+    const BASE_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=fe669351939f40d5b385ad6ec93c0df6`;
     axios
       .get(BASE_URL)
       .then((res) => {
