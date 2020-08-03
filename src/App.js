@@ -11,8 +11,8 @@ import Recipes from "./Recipes/Recipes";
 import QRCodeGeneration from "./QRCode/QRCodeGeneration";
 import COVID from "./COVID/COVID";
 import Movies from "./Movies/Movies";
-
 import Jokes from "./Jokes/Jokes";
+import News from "./News/News";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -42,6 +42,7 @@ function App() {
           <Route exact path="/Weather" component={Weather} />
           <Route exact path="/Movies" component={Movies} />
           <Route exact path="/Jokes" component={Jokes} />
+          <Route exact path="/News" component={News} />
           <Route exact path="/QRCode" component={QRCodeGeneration} />
           <Route
             exact

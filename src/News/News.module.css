@@ -1,0 +1,11 @@
+.newscategary {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0 0 20px 0;
+}
+
+.newsbutton {
+  width: 120px;
+  margin: 10px 0 0 0;
+}

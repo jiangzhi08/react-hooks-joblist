@@ -12,11 +12,12 @@ export default function NavbarZJ() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/GitHubJobList">GitHubJobs</Nav.Link>
+            <Nav.Link href="/News">News</Nav.Link>
             <Nav.Link href="/COVID">COVID</Nav.Link>
             <Nav.Link href="/Weather">Weather</Nav.Link>
             <Nav.Link href="/Movies">Movies</Nav.Link>
             <Nav.Link href="/Jokes">Jokes</Nav.Link>
-            <Nav.Link href="/QRCode">QRCode</Nav.Link>
+            {/* <Nav.Link href="/QRCode">QRCode</Nav.Link> */}
             <NavDropdown title="Recipes" id="basic-nav-dropdown">
               <NavDropdown.Item href="/Recipes/Mediterranean">
                 Mediterranean
