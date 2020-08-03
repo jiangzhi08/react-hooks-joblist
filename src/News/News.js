@@ -13,7 +13,9 @@ export default function News() {
   const handleShow = () => setShow(true);
 
   const fetchNews = (category) => {
-    const BASE_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=fe669351939f40d5b385ad6ec93c0df6`;
+    // const BASE_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=fe669351939f40d5b385ad6ec93c0df6`;
+    const BASE_URL = `https://gnews.io/api/v3/topics/${category}?token=0898d87cbb9f6b0b247b3cdbcafa61af`;
+
     axios
       .get(BASE_URL)
       .then((res) => {
@@ -27,7 +29,7 @@ export default function News() {
   };
 
   useEffect(() => {
-    fetchNews("business");
+    fetchNews("nation");
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -42,6 +44,21 @@ export default function News() {
         <Button
           className={styles.newsbutton}
           onClick={handOnclick}
+          value="world"
+        >
+          world
+        </Button>
+        <Button
+          className={styles.newsbutton}
+          onClick={handOnclick}
+          value="nation"
+        >
+          nation
+        </Button>
+
+        <Button
+          className={styles.newsbutton}
+          onClick={handOnclick}
           value="business"
         >
           business
@@ -52,14 +69,6 @@ export default function News() {
           value="entertainment"
         >
           entertainment
-        </Button>
-
-        <Button
-          className={styles.newsbutton}
-          onClick={handOnclick}
-          value="general"
-        >
-          general
         </Button>
 
         <Button
