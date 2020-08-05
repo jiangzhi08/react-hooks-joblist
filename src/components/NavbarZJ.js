@@ -17,7 +17,7 @@ export default function NavbarZJ() {
             <Nav.Link href="/Weather">Weather</Nav.Link>
             <Nav.Link href="/Movies">Movies</Nav.Link>
             <Nav.Link href="/Jokes">Jokes</Nav.Link>
-            {/* <Nav.Link href="/QRCode">QRCode</Nav.Link> */}
+            <Nav.Link href="/QRCode">QRCode</Nav.Link>
             <NavDropdown title="Recipes" id="basic-nav-dropdown">
               <NavDropdown.Item href="/Recipes/Mediterranean">
                 Mediterranean

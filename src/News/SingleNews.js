@@ -13,7 +13,8 @@ export default function SingleNews({ newsobj }) {
             <Card.Subtitle className="text-muted mb-2">
               {newsobj.byline} -{" "}
               <span className="text-muted font-weight-light">
-                {new Date(newsobj.created_date).toLocaleDateString()}
+                {new Date(newsobj.created_date).toLocaleDateString()}{" "}
+                {new Date(newsobj.created_date).toLocaleTimeString()}
               </span>
             </Card.Subtitle>
 

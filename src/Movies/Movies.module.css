@@ -3,3 +3,23 @@
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
+.search_form {
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_bar {
+  width: 50%;
+  border: none;
+  padding: 10px;
+}
+
+.search_button {
+  background: lightcoral;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+}

@@ -44,7 +44,8 @@ function App() {
           <Route exact path="/Jokes" component={Jokes} />
           <Route exact path="/News" component={News} />
           <Route exact path="/QRCode" component={QRCodeGeneration} />
-          <Route
+          <Route exact path="/Recipes/:cuisineType" component={Recipes} />
+          {/* <Route
             exact
             path="/Recipes/Mediterranean"
             component={() => <Recipes cuisineType="Mediterranean" />}
@@ -63,7 +64,7 @@ function App() {
             exact
             path="/Recipes/Japanese"
             component={() => <Recipes cuisineType="Japanese" />}
-          />
+          /> */}
           <Route component={GitHubJobList} />
         </Switch>
       </BrowserRouter>

@@ -3,43 +3,57 @@ import axios from "axios";
 import { Container, Modal, Row, Col } from "react-bootstrap";
 import Movie from "./Movie";
 import styles from "./Movies.module.css";
+import { connect } from "react-redux";
+import { fetchPosts } from "../actions/postsActions";
+import loaderimg from "../images/loader.gif";
+import MoviesPagination from "./MoviesPagination";
 
-export default function Movies() {
-  const [movies, setMovies] = useState([]);
+const Movies = ({ dispatch, loading, movies, total_pages, hasErrors }) => {
   const [releaseyear, setReleaseyear] = useState("2020");
+  const [page, setPage] = useState(1);
+
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const BASE_URL = `https://api.themoviedb.org/3/search/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&query=${query}`;
+
+    dispatch(fetchPosts(BASE_URL));
+  }, [dispatch, query]);
+
+  useEffect(() => {
+    // const BASE_URL = `https://api.nytimes.com/svc/news/v3/content/all/${query}.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI`;
+    // const BASE_URL = `https://api.themoviedb.org/3/discover/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&primary_release_year=${query}&page=${page}&sort_by=revenue.desc`;
+    const BASE_URL = `https://api.themoviedb.org/3/discover/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&primary_release_year=${releaseyear}&page=${page}`;
+
+    dispatch(fetchPosts(BASE_URL));
+  }, [dispatch, releaseyear, page]);
+
   const [movieinfo, setMovieinfo] = useState("");
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const fetchMovies = (BASE_URL) => {
-    //      const api_key = 914a6dcae52e88ef56ed7a1e0305eb88;
-    // 'https://api.themoviedb.org/3/discover/movie?api_key=' +  api_key + '&primary_release_year=2017&sort_by=revenue.desc'
+  // const fetchSearchMovies = (BASE_URL) => {
+  //   axios
+  //     .get(BASE_URL)
+  //     .then((res) => {
+  //       // console.log(res.data.page);
+  //       // console.log(res.data.results);
+  //       setMovies(res.data.results);
+  //     })
+  //     .catch((e) => {
+  //       handleShow();
+  //       console.log(e);
+  //     });
+  // };
 
-    // https://api.themoviedb.org/3/movie/550?api_key=914a6dcae52e88ef56ed7a1e0305eb88
-    // const api = “&api_key=feb6f0eeaa0a72662967d77079850353”;
-    // const endpoint = `https://api.themoviedb.org/3/search/movie?query=${search}${api}`;
-    // const poster = “https://image.tmdb.org/t/p/w185/wR5HZWdVpcXx9sevV1bQi7rP4op.jpg";
-
-    axios
-      .get(BASE_URL)
-      .then((res) => {
-        // console.log(res.data.page);
-        // console.log(res.data.results);
-        setMovies(res.data.results);
-      })
-      .catch((e) => {
-        handleShow();
-        console.log(e);
-      });
-  };
-
-  useEffect(() => {
-    const BASE_URL = `https://api.themoviedb.org/3/discover/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&primary_release_year=${releaseyear}&sort_by=revenue.desc`;
-    fetchMovies(BASE_URL);
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   const BASE_URL = `https://api.themoviedb.org/3/discover/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&primary_release_year=${releaseyear}&sort_by=revenue.desc`;
+  //   fetchMovies(BASE_URL);
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const movieDetailClicked = (movieid) => {
     const BASE_URL = `https://api.themoviedb.org/3/movie/${movieid}?api_key=914a6dcae52e88ef56ed7a1e0305eb88`;
@@ -61,17 +75,59 @@ export default function Movies() {
 
   const handleChangeyear = (e) => {
     setReleaseyear(e.target.value);
-    const BASE_URL = `https://api.themoviedb.org/3/discover/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&primary_release_year=${e.target.value}&sort_by=revenue.desc`;
-    fetchMovies(BASE_URL);
+    setPage(1);
+    // setReleaseyear(e.target.value);
+    // const BASE_URL = `https://api.themoviedb.org/3/discover/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&primary_release_year=${e.target.value}&sort_by=revenue.desc`;
+    // fetchMovies(BASE_URL);
+  };
+
+  const updateSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const getSearch = (e) => {
+    e.preventDefault();
+    setQuery(search);
+  };
+
+  const renderPosts = () => {
+    if (loading) return <img src={loaderimg} alt="Loading" width="100" />;
+    if (hasErrors) return <p>Too many requests. Refresh later please </p>;
+    // return posts.map((post) => <h1 key={post.id}>{post.title} </h1>);
+    if (movies)
+      return movies.map((item) => (
+        <Movie
+          key={item.id}
+          poster_path={`${posterBase}${item.poster_path}`}
+          title={item.title}
+          movieDetailClicked={movieDetailClicked}
+          movieid={item.id}
+        />
+      ));
   };
 
   return (
     <Container className="my-4">
       <Container>
         <Row>
-          <Col>
+          {/* <Col>
             <h1 className="mb-4">Movies</h1>
+          </Col> */}
+          <Col>
+            <form className={styles.search_form} onSubmit={getSearch}>
+              <input
+                className={styles.search_bar}
+                type="text"
+                value={search}
+                onChange={updateSearch}
+              />
+              <button className={styles.search_button} type="submit">
+                Search
+              </button>
+            </form>
           </Col>
+        </Row>
+        <Row>
           <Col>
             {" "}
             <label className="mx-4">Release Year</label>
@@ -107,20 +163,17 @@ export default function Movies() {
               <option value="2000">2000</option>
             </select>
           </Col>
+          <Col>
+            <MoviesPagination
+              page={page}
+              setPage={setPage}
+              total_pages={total_pages}
+            />
+          </Col>
         </Row>
       </Container>
 
-      <Container className={styles.movies}>
-        {movies.map((item) => (
-          <Movie
-            key={item.id}
-            poster_path={`${posterBase}${item.poster_path}`}
-            title={item.title}
-            movieDetailClicked={movieDetailClicked}
-            movieid={item.id}
-          />
-        ))}
-      </Container>
+      <Container className={styles.movies}>{renderPosts()}</Container>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{movieinfo.title}</Modal.Title>
@@ -135,7 +188,7 @@ export default function Movies() {
       </Modal>
     </Container>
   );
-}
+};
 
 var styles1 = {
   select: {
@@ -154,3 +207,13 @@ var styles1 = {
     },
   },
 };
+
+// Map Redux state to React component props
+const mapStateToProps = (state) => ({
+  loading: state.posts.loading,
+  total_pages: state.posts.posts.total_pages,
+  movies: state.posts.posts.results,
+  hasErrors: state.posts.hasErrors,
+});
+// Connect Redux to React
+export default connect(mapStateToProps)(Movies);

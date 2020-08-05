@@ -1,44 +1,69 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Container, Modal, Button } from "react-bootstrap";
 import SingleNews from "./SingleNews";
 import styles from "./News.module.css";
+import { connect } from "react-redux";
+import { fetchPosts } from "../actions/postsActions";
+import loaderimg from "../images/loader.gif";
 
-export default function News() {
-  const [newsdata, setNewsdata] = useState([]);
+// export default function News() {
+const News = ({ dispatch, loading, newsdata, hasErrors }) => {
+  // useEffect(() => {
+  //   dispatch(fetchPosts("u.s."));
+  //   console.log("get here 1 ");
+  // }, [dispatch]);
+
+  const [query, setQuery] = useState("u.s.");
+
+  useEffect(() => {
+    const BASE_URL = `https://api.nytimes.com/svc/news/v3/content/all/${query}.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI`;
+    dispatch(fetchPosts(BASE_URL));
+  }, [dispatch, query]);
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleShow = () => setShow(true);
 
-  const fetchNews = (category) => {
-    // const BASE_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=fe669351939f40d5b385ad6ec93c0df6`;
-    // const BASE_URL = `https://gnews.io/api/v3/topics/${category}?token=0898d87cbb9f6b0b247b3cdbcafa61af`;
-    const BASE_URL = `https://api.nytimes.com/svc/news/v3/content/all/${category}.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI`;
+  // const fetchNews = (category) => {
+  //   // const BASE_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=fe669351939f40d5b385ad6ec93c0df6`;
+  //   // const BASE_URL = `https://gnews.io/api/v3/topics/${category}?token=0898d87cbb9f6b0b247b3cdbcafa61af`;
+  //   const BASE_URL = `https://api.nytimes.com/svc/news/v3/content/all/${category}.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI`;
 
-    // https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI
-    //https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI
+  //   // https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI
+  //   //https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI
 
-    axios
-      .get(BASE_URL)
-      .then((res) => {
-        setNewsdata(res.data.results);
-        // console.log(res.data.results);
-      })
-      .catch((e) => {
-        handleShow();
-        console.log(e);
-      });
-  };
+  //   axios
+  //     .get(BASE_URL)
+  //     .then((res) => {
+  //       setNewsdata(res.data.results);
+  //       // console.log(res.data.results);
+  //     })
+  //     .catch((e) => {
+  //       handleShow();
+  //       console.log(e);
+  //     });
+  // };
 
-  useEffect(() => {
-    fetchNews("u.s.");
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   fetchNews("u.s.");
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handOnclick = (e) => {
-    fetchNews(e.target.value);
+    setQuery(e.target.value);
+    // dispatch(fetchPosts(e.target.value));
+    // fetchNews(e.target.value);
+  };
+
+  const renderPosts = () => {
+    if (loading) return <img src={loaderimg} alt="Loading" width="100" />;
+    if (hasErrors) return <p>Too many requests. Refresh later please </p>;
+    // return posts.map((post) => <h1 key={post.id}>{post.title} </h1>);
+    if (newsdata)
+      return newsdata.map((item, index) => {
+        return <SingleNews key={index} newsobj={item} />;
+      });
   };
 
   return (
@@ -116,9 +141,7 @@ export default function News() {
         </Button>
       </div>
 
-      {newsdata.map((item, index) => {
-        return <SingleNews key={index} newsobj={item} />;
-      })}
+      <section>{renderPosts()}</section>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -135,4 +158,13 @@ export default function News() {
       </Modal>
     </Container>
   );
-}
+};
+
+// Map Redux state to React component props
+const mapStateToProps = (state) => ({
+  loading: state.posts.loading,
+  newsdata: state.posts.posts.results,
+  hasErrors: state.posts.hasErrors,
+});
+// Connect Redux to React
+export default connect(mapStateToProps)(News);

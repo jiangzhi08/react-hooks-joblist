@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Movie.module.css";
 
-export default function Recipe({
+export default function Movie({
   poster_path,
   title,
   movieDetailClicked,

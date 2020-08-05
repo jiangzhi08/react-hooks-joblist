@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import Job from "./Job";
 import JobsPagination from "./JobsPagination";
 import SearchForm from "./SearchForm";
+import loaderimg from "../images/loader.gif";
 
 function GitHubJobList() {
   const [params, setParams] = useState({});
@@ -24,10 +25,8 @@ function GitHubJobList() {
       <h1 className="mb-4">GitHub Jobs</h1>
       <SearchForm params={params} onParamChange={handleParamChange} />
       <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} />
-      {loading && (
-        <img src={require("./loader.gif")} alt="Loading" width="100" />
-      )}
-      {error && <h1>error, refreshing page: {error}</h1>}
+      {loading && <img src={loaderimg} alt="Loading" width="100" />}
+      {error && <h1>error, refreshing page : {error}</h1>}
       {jobs.map((job) => {
         return <Job key={job.id} job={job} />;
       })}
