@@ -13,13 +13,6 @@ const Movies = ({ dispatch, loading, movies, total_pages, hasErrors }) => {
   const [page, setPage] = useState(1);
 
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    const BASE_URL = `https://api.themoviedb.org/3/search/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&query=${query}`;
-
-    dispatch(fetchPosts(BASE_URL));
-  }, [dispatch, query]);
 
   useEffect(() => {
     // const BASE_URL = `https://api.nytimes.com/svc/news/v3/content/all/${query}.json?api-key=BE6dEjKhtmw2otf5g6EplSLuNksx8iLI`;
@@ -87,7 +80,8 @@ const Movies = ({ dispatch, loading, movies, total_pages, hasErrors }) => {
 
   const getSearch = (e) => {
     e.preventDefault();
-    setQuery(search);
+    const BASE_URL = `https://api.themoviedb.org/3/search/movie?api_key=914a6dcae52e88ef56ed7a1e0305eb88&query=${search}`;
+    dispatch(fetchPosts(BASE_URL));
   };
 
   const renderPosts = () => {
