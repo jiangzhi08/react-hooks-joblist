@@ -19,11 +19,7 @@ function App() {
 
   return (
     <Container className="my-4">
-      <img
-        style={{ width: "50px", margin: "0 50px 0 0" }}
-        src={require("./images/zjlogo.png")}
-        alt="logo"
-      />
+      {/* <AppNavbar /> */}
       {isAuthenticated && (
         <span className="mr-6">
           Welcome, {user.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -7,13 +7,13 @@
 .search_form {
   min-height: 10vh;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
 .search_bar {
   width: 50%;
-  border: none;
+  border: solid lightgray 1px;
   padding: 10px;
 }
 

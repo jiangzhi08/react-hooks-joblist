@@ -94,6 +94,7 @@ const Movies = ({ dispatch, loading, movies, total_pages, hasErrors }) => {
           key={item.id}
           poster_path={`${posterBase}${item.poster_path}`}
           title={item.title}
+          release_date={item.release_date}
           movieDetailClicked={movieDetailClicked}
           movieid={item.id}
         />
@@ -124,9 +125,9 @@ const Movies = ({ dispatch, loading, movies, total_pages, hasErrors }) => {
         <Row>
           <Col>
             {" "}
-            <label className="mx-4">Release Year</label>
+            {/* <label className="mx-4">Release Year</label> */}
             <select
-              defaultValue="TX"
+              // defaultValue="TX"
               className="form-control"
               style={styles1.select}
               name="city"
@@ -168,6 +169,7 @@ const Movies = ({ dispatch, loading, movies, total_pages, hasErrors }) => {
       </Container>
 
       <Container className={styles.movies}>{renderPosts()}</Container>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{movieinfo.title}</Modal.Title>
